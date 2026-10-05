@@ -28,10 +28,11 @@ void main(void) {
     LATHbits.LATH3=0;   //set initial output state
     TRISHbits.TRISH3=0; //set TRIS value for pin (output)
     
-    // setup pins for input (connected to buttons)
+    // setup pin for input (connected to button)
     TRISFbits.TRISF2=1; //set TRIS value for pin (input)
     ANSELFbits.ANSELF2=0; //turn off analogue input on pin
     
+    // setup second button input
     TRISFbits.TRISF3=1; //set TRIS value for pin (input)
     ANSELFbits.ANSELF3=0; //turn off analogue input on pin  
     
@@ -41,6 +42,7 @@ void main(void) {
             LATDbits.LATD7 = !LATDbits.LATD7; //toggle first LED
         }
         
+        // check second button and toggle second LED
         if (!PORTFbits.RF3) {
             LATHbits.LATH3 = !LATHbits.LATH3; //toggle second LED
         }
