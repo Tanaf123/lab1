@@ -24,6 +24,10 @@ void main(void) {
     LATDbits.LATD7=0;   //set initial output state
     TRISDbits.TRISD7=0; //set TRIS value for pin (output)
     
+    // setup second LED output
+    LATHbits.LATH3=1;    //Set initial output state
+    TRISHbits.TRISH3=0;  //set TRIS value for pin (output)
+    
     // setup pin for input (connected to button)
     TRISFbits.TRISF2=1; //set TRIS value for pin (input)
     ANSELFbits.ANSELF2=0; //turn off analogue input on pin  
@@ -32,7 +36,10 @@ void main(void) {
         
         while (PORTFbits.RF2); //empty while loop (wait for button press)
         
-        if (!PORTFbits.RF2) LATDbits.LATD7 = !LATDbits.LATD7; //toggle LED
+        if (!PORTFbits.RF2) {
+            LATDbits.LATD7 = !LATDbits.LATD7; //toggle LED
+            LATHbits.LATH3 = !LATDbits.LATD7; //set second LED opposite to first LED
+        }
 
         __delay_ms(200); // call built in delay function 
     }
